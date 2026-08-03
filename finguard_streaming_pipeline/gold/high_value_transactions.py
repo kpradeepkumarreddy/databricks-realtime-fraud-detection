@@ -11,7 +11,7 @@ def high_value_transactions() -> DataFrame:
     customers = spark.read.table("finguard.silver.customers")
 
     joined_df = (
-        transactions.join(customers, transactions.customer_id == customers.customer_id, "left")
+        transactions.join(customers, transactions.customer_id == customers.customer_id, "inner")
         .filter(F.col("amount") > F.col("transaction_limit"))
         .select(
             F.concat_ws("-", F.lit("ALERT"), F.col("transaction_id")).alias("alert_id"),
