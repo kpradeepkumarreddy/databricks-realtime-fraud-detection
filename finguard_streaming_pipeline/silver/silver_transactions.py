@@ -2,7 +2,7 @@ from pyspark import pipelines as dp
 from pyspark.sql.dataframe import DataFrame
 from pyspark.sql.functions import current_timestamp
 from pyspark.sql.functions import from_json, col
-from pyspark.sql.types import StructType, StructField, StringType, DoubleType, BooleanType
+from pyspark.sql.types import StructType, StructField, StringType, DoubleType, BooleanType, TimestampType
 
 @dp.table(
     name="finguard.silver.transactions",
@@ -30,7 +30,7 @@ def silver_transactions() -> DataFrame :
         StructField("device_id", StringType()),
         StructField("city", StringType()),
         StructField("country", StringType()),
-        StructField("transaction_timestamp", StringType()),
+        StructField("transaction_timestamp", TimestampType()),
         StructField("is_international", BooleanType()),
         StructField("status", StringType())
     ])
